@@ -7,7 +7,7 @@ def initialize_bugzilla(url, bug):
     """check url here """
     bz = bugzilla.Bugzilla(url=url)
     bug = bz.getbug(bug)
-    print bug
+    return bug, bz
 def main():
     parser = OptionParser(usage="usage: %prog [options] filename",
                           version="%prog 1.0")
@@ -24,7 +24,9 @@ def main():
     if len(args) != 0:
         parser.error("wrong number of arguments")
 
-    initialize_bugzilla(options.url, options.bugnumber)
+    bug, bz = initialize_bugzilla(options.url, options.bugnumber)
+    print bug
+
 
 if __name__ == '__main__':
     main()
